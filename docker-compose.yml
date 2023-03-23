@@ -1,0 +1,27 @@
+version: "3.8"
+
+networks:
+  redis-dump-network:
+
+volumes:
+  redis-dump-volume:
+
+services:
+  redis:
+    container_name: "redis-dump-db-container"
+    build:
+      context: src/redis
+      dockerfile: Dockerfile
+    networks:
+      - redis-dump-network
+    volumes:
+      - redis-dump-volume:/data
+  aws-cli:
+    container_name: "redis-dump-storage-container"
+    build:
+      context: src/storage
+      dockerfile: Dockerfile
+    networks:
+      - redis-dump-network
+    volumes:
+      - redis-dump-volume:/data

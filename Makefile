@@ -32,8 +32,8 @@ rm:
 
 teardown:
 	make rm --ignore-errors
-	docker network rm redis-dump-network
-	docker volume rm redis-dump-volume
+	- docker network rm redis-dump-network
+	- docker volume rm redis-dump-volume
 
 redis-cli:
 	docker exec --interactive --tty redis-dump-db-container redis-cli
